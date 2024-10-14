@@ -7,7 +7,6 @@ spring:
     username: ${DB_USER}
     password: ${DB_PW}
 #    password: 1111
-
   sql:
     init:
       mode: never
