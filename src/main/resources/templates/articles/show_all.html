@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org"
       xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}"> <!-- layout.html 사용 -->
-<meta charset="UTF-8">
-<!-- 전체 적용될 CSS -->
-<th:block layout:fragment="css"></th:block>
-<!-- 전체 적용될 스크립트 -->
-<th:block layout:fragment="script"></th:block>
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <!--  <script src="/js/jquery.js"></script>-->
+</head>
 
-<!-- 우리가 작업할 공간 -->
+<!--  우리가 작업할 공간 -->
 <body>
 <div layout:fragment="content" class="content">
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Title</th>
-      <th scope="col">Content</th>
-    </tr>
-    </thead>
-    <tbody>
-    <div>
-      <tr>
-        <th scope="row">1</th>
-        <td>
-          <a href="">제목111 </a>
-        </td>
-        <td>내용 1111</td>
-      </tr>
+
+    <div th:unless="${msg == null}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong th:text="${msg}">Holy guacamole!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
-    </tbody>
-  </table>
-  <a href="/articles/new">New Article</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div>
+            <tr th:each="article : ${articles}" th:object="${article}">
+                <th scope="row" th:text="*{id}">1</th>
+                <td>
+                    <a th:href="@{/articles/{id}(id=*{id})}" th:text="*{title}">제목111 </a>
+                </td>
+                <td th:text="*{content}">내용 1111</td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+    <a href="/articles/new">New Article</a>
 </div>
+
 </body>
 </html>

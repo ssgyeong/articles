@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org"
       xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}"> <!-- layout.html 사용 -->
-<meta charset="UTF-8">
-<!-- 전체 적용될 CSS -->
-<th:block layout:fragment="css"></th:block>
-<!-- 전체 적용될 스크립트 -->
-<th:block layout:fragment="script"></th:block>
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <!--  <script src="/js/jquery.js"></script>-->
+</head>
 
-<!-- 우리가 작업할 공간 -->
+<!--  우리가 작업할 공간 -->
 <body>
 <div layout:fragment="content" class="content">
     <table class="table m-2">
@@ -21,14 +20,14 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row" >1</th>
-            <td >제목111</td>
-            <td >내용 1111</td>
+            <th scope="row" th:text="${dto.id}">1</th>
+            <td th:text="${dto.title}">제목111</td>
+            <td th:text="${dto.content}">내용 1111</td>
         </tr>
         </tbody>
     </table>
-    <a href="" class="btn btn-primary">Edit</a>
-    <a href="" class="btn btn-danger">Delete</a>
+    <a th:href="@{/articles/{id}/update(id=${dto.id})}" class="btn btn-primary">Edit</a>
+    <a th:href="@{/articles/{id}/delete(id=${dto.id})}" class="btn btn-danger">Delete</a>
     <a href="/articles">Go to Article List</a>
     <br><br>
     <div class="card m-2">
@@ -68,5 +67,6 @@
         <button type="button" class="btn btn-primary" id="comment-create-btn">댓글 작성</button>
     </form>
 </div>
+
 </body>
 </html>
