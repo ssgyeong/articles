@@ -9,12 +9,12 @@ spring:
 #    password: 1111
   sql:
     init:
-      mode: never
+      mode: always
         #always:매번, embedded:내장 DB만, neber(모든동작안함)
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true

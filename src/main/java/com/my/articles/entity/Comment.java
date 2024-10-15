@@ -6,21 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data //getter, setter
-@Table(name="article")
+@Data
+@Table(name="comment")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Article {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String title;
+    private String nickname;
 
-    @Column(nullable = false, length = 1000)
-    private String content;
+    private String body;
 
-    @OneToOne(mappedBy = "article")
-    private Comment comment;
+    @OneToOne
+    @JoinColumn(name="id", nullable = false)
+    private Article article;
 }
