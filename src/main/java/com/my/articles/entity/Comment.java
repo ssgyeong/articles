@@ -1,15 +1,11 @@
 package com.my.articles.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
-@Table(name="comment")
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter //@Data로 쓰면 스택 오버플로우 나서 getter와 setter로 작성
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +15,7 @@ public class Comment {
 
     private String body;
 
-    @OneToOne
-    @JoinColumn(name="id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id")
     private Article article;
 }

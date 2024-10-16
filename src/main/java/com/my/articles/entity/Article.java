@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Data //getter, setter
-@Table(name="article")
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,8 @@ public class Article {
     @Column(nullable = false, length = 1000)
     private String content;
 
-    @OneToOne(mappedBy = "article")
-    private Comment comment;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    List<Comment> comments = new ArrayList<>();
+
 }

@@ -30,28 +30,17 @@
     <a th:href="@{/articles/{id}/delete(id=${dto.id})}" class="btn btn-danger">Delete</a>
     <a href="/articles">Go to Article List</a>
     <br><br>
-    <div class="card m-2">
+    <div class="card m-2" th:each="comment : ${dto.comments}"
+         th:object="${comment}">
         <div class="card-header">
-            <span>Featured</span>
+            <span th:text="*{nickname}">Featured</span>
             <a class="btn btn-sm btn-outline-primary">수정</a>
             <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn">삭제</a>
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text" th:text="*{body}">With supporting text below as a natural lead-in to additional content.</p>
         </div>
     </div>
-
-    <div class="card m-2">
-        <div class="card-header">
-            <span>Featured</span>
-            <a class="btn btn-sm btn-outline-primary">수정</a>
-            <a class="btn btn-sm btn-outline-primary" id="comment-delete-btn">삭제</a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-    </div>
-
     <form>
         <!-- 닉네임 입력-->
         <div class="m-2">
