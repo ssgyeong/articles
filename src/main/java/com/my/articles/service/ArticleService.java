@@ -7,6 +7,8 @@ import com.my.articles.repository.ArticleRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -18,6 +20,9 @@ import java.util.stream.Collectors;
 public class ArticleService {
     @Autowired
     ArticleDAO dao;
+
+    @Autowired
+    ArticleRepository articleRepository;
 
     //전체보기
     public List<ArticleDTO> getAllArticle() {
@@ -50,5 +55,10 @@ public class ArticleService {
     //새 게시글
     public void insertArticle(ArticleDTO dto) {
         dao.insertArticle(ArticleDTO.fromDto(dto));
+    }
+
+    public Page<ArticleDTO> getArticlePage(Pageable pageable) {
+        Page<Article> articles = articleRepository.findAll(pageable);
+        return articles.map(x->ArticleDTO.fromArticle(x));
     }
 }
