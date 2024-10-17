@@ -39,6 +39,27 @@
         </tbody>
     </table>
     <a href="/articles/new">New Article</a>
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item"
+                th:classappend="${articles.number} <= 0 ? 'disabled'">
+                <a class="page-link" th:href="@{/articles(page=${articles.number-1})}"> 이전 </a>
+            </li>
+
+            <th:block th:each="pageNumber : ${pageBars}">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/articles(page=${pageNumber})}"
+                       th:text="${pageNumber + 1}">1</a>
+                </li>
+            </th:block>
+
+            <li class="page-item"
+                th:classappend="${articles.number+1} == ${articles.totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{/articles(page=${articles.number+1})}"> 다음 </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 </body>
