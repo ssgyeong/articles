@@ -35,7 +35,7 @@ public class ArticleController {
     //메인페이지 (전체보기)
     @GetMapping("")
     public String showAllArticles(Model model,
-                                  @PageableDefault(page = 5, size = 5, sort = "id", direction = Sort.Direction.DESC)
+                                  @PageableDefault(page = 0, size = 5, sort = "id", direction = Sort.Direction.DESC)
                                   Pageable pageable) { //size = 한 페이지당 5개씩, "id"로 정렬 (DESC)
 //        List<ArticleDTO> dtoList = articleService.getAllArticle();
         Page<ArticleDTO> paging = articleService.getArticlePage(pageable);
